@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bpa100n - 프로그램 등록 (Vue 버전)</title>
+
+    <!-- Vue 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <!-- SBGrid3 라이브러리 -->
+    <link rel="stylesheet" href="/path/to/sbgrid3.css">
+    <script src="/path/to/sbgrid3.js"></script>
+
+    <!-- CTV UI Vue 라이브러리 -->
+    <link rel="stylesheet" href="/dist/ctv-ui-vue.css">
+    <script src="/dist/ctv-ui-vue.js"></script>
+    <script src="/ctv-ui/ctv-Page-Utils.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 40px);
+            gap: 10px;
+        }
+
+        #queryFilter {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #grid1 {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- 조회 필터 영역 -->
+        <div id="queryFilter"></div>
+
+        <!-- 그리드 영역 -->
+        <div id="grid1"></div>
+    </div>
+
+    <script src="Bpa100n-vue.js"></script>
+    <script>
+        // 페이지 로드 시 초기화
+        window.onload = () => Bpa100n.init();
+    </script>
+</body>
+
+</html>

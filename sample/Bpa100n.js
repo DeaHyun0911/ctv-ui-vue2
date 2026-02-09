@@ -33,6 +33,40 @@ const Bpa100n = (function () {
             query: 'UfnQuery',  // 프로그램 조회
             save: 'UfnSave'     // 프로그램 저장
         }
+
+        // https://ctviv.com/CWWS/Program/cwwsPages/cBase/Bpa100n.ashx 으로 요청시
+
+        //         ------WebKitFormBoundaryq5I4Bwk8HRUOUij0
+        // Content-Disposition: form-data; name="jCerts"
+
+        // [null,null,"https://ctviv.com:443/CWWS/","CTS-DSU",null,"CTviv_DATA_WRK",null,null,"220.126.171.98","","","system","Bpa100n","8CB296C152601C61685CB6EAD1782FCE","2A2AB4B05ED945EFA10378211D61C83C","1","28752E4B2864CCB187A5661414397D7E","8C123D8B4232341111006F59918173F9","ADA0E4A5F8E3E2F055DE8AF0DE672FCE","ADA0E4A5F8E3E2F055DE8AF0DE672FCE","67CCA4206BE1251824D5CF44EE56286E","67CCA4206BE1251824D5CF44EE56286E","256171BA8CCAC4B7BE43E5D150866098","ADA0E4A5F8E3E2F055DE8AF0DE672FCE","","ADA0E4A5F8E3E2F055DE8AF0DE672FCE","DCEFB0CD1480AD95F6D2C3BF94D6E114","40CCF2D126F0E40BD0412C3208343645","892D36AAB9E63D39B78F37BC55474F9B","323D30C49B2EA669414F12483FDA0E1B","40CCF2D126F0E40BD0412C3208343645","",""]
+        // ------WebKitFormBoundaryq5I4Bwk8HRUOUij0
+        // Content-Disposition: form-data; name="KeyInfo"
+
+        // [null]
+        // ------WebKitFormBoundaryq5I4Bwk8HRUOUij0
+        // Content-Disposition: form-data; name="FuncNm"
+
+        // ["UfnQuery",""]
+        // ------WebKitFormBoundaryq5I4Bwk8HRUOUij0
+        // Content-Disposition: form-data; name="bParam"
+
+        // ["WERP.B2BERP","","","",""]
+        // ------WebKitFormBoundaryq5I4Bwk8HRUOUij0--
+
+        // jCerts
+        // [null,null,"https://ctviv.com:443/CWWS/","CTS-DSU",null,"CTviv_DATA_WRK",null,null,"220.126.171.98","","","system","Bpa100n","8CB296C152601C61685CB6EAD1782FCE","2A2AB4B05ED945EFA10378211D61C83C","1","28752E4B2864CCB187A5661414397D7E","8C123D8B4232341111006F59918173F9","ADA0E4A5F8E3E2F055DE8AF0DE672FCE","ADA0E4A5F8E3E2F055DE8AF0DE672FCE","67CCA4206BE1251824D5CF44EE56286E","67CCA4206BE1251824D5CF44EE56286E","256171BA8CCAC4B7BE43E5D150866098","ADA0E4A5F8E3E2F055DE8AF0DE672FCE","","ADA0E4A5F8E3E2F055DE8AF0DE672FCE","DCEFB0CD1480AD95F6D2C3BF94D6E114","40CCF2D126F0E40BD0412C3208343645","892D36AAB9E63D39B78F37BC55474F9B","323D30C49B2EA669414F12483FDA0E1B","40CCF2D126F0E40BD0412C3208343645","",""]
+
+        // KeyInfo
+        // [null]
+
+        // FuncNm
+        // ["UfnQuery",""]
+
+        // bParam
+        // ["WERP.B2BERP","","","",""]
+
+        // 다음과 같이 폼데이터를 전송
     };
 
     // ==============================================
