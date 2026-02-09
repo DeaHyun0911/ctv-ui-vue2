@@ -1,0 +1,37 @@
+<%@ Master Language="C#" AutoEventWireup="true" %>
+<!DOCTYPE html>
+<html lang="ko">
+<head runat="server">
+    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><asp:ContentPlaceHolder ID="PageTitle" runat="server">CWWS</asp:ContentPlaceHolder></title>
+    <link href="../../cwwsCom/SBGrid3/css/sbgrid3.css?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" rel="stylesheet" />
+    <link href="../../cwwsCom/css/cwws-Grid3Com.css?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" rel="stylesheet" />
+    <link href="../../cwwsCom/css/cwws-Component.css?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" rel="stylesheet" />
+    <link href="../../cwwsCom/js/ctv-ui-vue.css?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" rel="stylesheet" />
+    <%=CWWS.CwwsComm.GetHeadPageCss("../../", Request.Params["ctv01"].Trim()) %>
+    <asp:ContentPlaceHolder ID="PageStyle" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="ctv-container">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+    </div>
+    
+    <script src='../../cwwsCom/js/ctv-ComVar.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>'></script>
+    <script src='../../cwwsCom/js/ctv-ui.min.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>'></script>
+    <script src='../../cwwsCom/js/ctv-PageHotKey.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>'></script>
+    <script src='../../cwwsCom/js/ctv-PageCom.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>'></script>
+    <script src='../../cwwsCom/js/ctv-PageGridLib.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>'></script>
+    <script src="../../cwwsCom/NewFileUpload/FileDown.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>"></script>
+    <script src='../../cwwsCom/js/ctv.xlsx.full.min.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>'></script>
+    <script src='../../cwwsCom/SBGrid3/license.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>'></script>
+    <script src='../../cwwsCom/SBGrid3/sbgrid3.js?ver=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>'></script>
+    
+    <asp:ContentPlaceHolder ID="PageScript" runat="server"></asp:ContentPlaceHolder>
+    
+    <%=CWWS.CwwsComm.GetHeadGridCss("../../", Request.Params["ctv01"].Trim()) %>
+</body>
+</html>
+
