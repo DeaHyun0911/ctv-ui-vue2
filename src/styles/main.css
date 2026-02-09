@@ -1,0 +1,239 @@
+/**
+ * CTV UI Vue - Main Styles
+ * 모든 컴포넌트의 공통 스타일
+ */
+
+/* Pretendard 폰트 */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('../css/PretendardVariable.woff2') format('woff2-variations');
+    font-weight: 45 920;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* CSS 변수 정의 */
+:root {
+    /* 컬러 */
+    --ctv-primary-color: #2196F3;
+    --ctv-secondary-color: #6c757d;
+    --ctv-success-color: #28a745;
+    --ctv-danger-color: #dc3545;
+    --ctv-warning-color: #ffc107;
+    --ctv-info-color: #17a2b8;
+    --ctv-error-color: #dc3545;
+
+    /* 텍스트 및 배경 */
+    --ctv-text-color: #333;
+    --ctv-text-muted: #999;
+    --ctv-bg-color: #fff;
+    --ctv-disabled-bg: #f5f5f5;
+    --ctv-disabled-color: #999;
+
+    /* 보더 */
+    --ctv-border-color: #ddd;
+    --ctv-border-radius: 4px;
+
+    /* 포커스 */
+    --ctv-focus-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+
+    /* 폰트 */
+    --ctv-font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+    --ctv-font-size: 14px;
+    --ctv-font-size-small: 12px;
+    --ctv-font-size-large: 16px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    box-shadow: 0 0 0 1000px white inset !important;
+}
+
+
+
+/* ===== Browser Default Reset ===== */
+input,
+textarea,
+select,
+button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    line-height: inherit;
+}
+
+/* ===== 공통 컴포넌트 스타일 ===== */
+[class^="ctv-"],
+[class*=" ctv-"] {
+    box-sizing: border-box;
+    font-family: var(--ctv-font-family);
+    font-size: var(--ctv-font-size);
+}
+
+/* 공통 컴포넌트 스타일 */
+.ctv-input,
+.ctv-select,
+.ctv-date,
+.ctv-textarea,
+.ctv-check,
+.ctv-switch {
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    margin-bottom: 12px;
+}
+
+/* Inner wrapper (라벨 + input wrapper) */
+.ctv-input__inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 라벨 공통 스타일 */
+.ctv-input__label {
+    display: inline-flex;
+    align-items: center;
+    min-width: 100px;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+.ctv-input__label--required::after {
+    content: ' *';
+    color: var(--ctv-error-color);
+    margin-left: 2px;
+}
+
+.ctv-input__label--left {
+    justify-content: flex-start;
+}
+
+.ctv-input__label--center {
+    justify-content: center;
+}
+
+.ctv-input__label--right {
+    justify-content: flex-end;
+}
+
+/* 입력 wrapper */
+.ctv-input__wrapper {
+    flex: 1;
+    position: relative;
+}
+
+/* 기본 input 스타일 */
+.ctv-input__field {
+    width: 100%;
+    padding: 6px 12px;
+    min-height: 32px;
+    font-size: 14px;
+    border: 1px solid var(--ctv-border-color);
+    border-radius: var(--ctv-border-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: var(--ctv-bg-color);
+}
+
+.ctv-input__field:focus {
+    outline: none;
+    border-color: var(--ctv-primary-color);
+}
+
+.ctv-input__field:disabled,
+.ctv-input__field:read-only {
+    background-color: var(--ctv-disabled-bg);
+    color: var(--ctv-disabled-color);
+    cursor: not-allowed;
+}
+
+.ctv-input__field--error {
+    border-color: var(--ctv-error-color);
+}
+
+/* 에러 메시지 (전체 요소 아래) */
+.ctv-input__error {
+    display: none;
+    margin-top: 4px;
+    margin-left: 108px;
+    /* 라벨 너비(100px) + gap(8px) */
+    font-size: 12px;
+    color: var(--ctv-error-color);
+}
+
+.ctv-input__error--show {
+    display: block;
+}
+
+/* direction: column */
+.ctv-input--column,
+.ctv-select--column,
+.ctv-textarea--column {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ctv-input--column .ctv-input__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+}
+
+.ctv-input--column .ctv-input__label,
+.ctv-select--column .ctv-input__label,
+.ctv-textarea--column .ctv-input__label {
+    min-width: auto;
+}
+
+.ctv-input--column .ctv-input__error {
+    margin-left: 0;
+    /* column 모드에서는 왼쪽 여백 제거 */
+}
+
+/* Combo 드롭다운 */
+.ctv-combo-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid var(--ctv-border-color);
+    border-top: none;
+    border-radius: 0 0 var(--ctv-border-radius) var(--ctv-border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+}
+
+.ctv-combo-dropdown--show {
+    display: block;
+}
+
+.ctv-combo-dropdown__item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.15s;
+}
+
+.ctv-combo-dropdown__item:hover,
+.ctv-combo-dropdown__item--active {
+    background-color: #f0f0f0;
+}

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTV UI Vue 컴포넌트 테스트</title>
+
+    <!-- CTV UI Vue CSS -->
+    <link rel="stylesheet" href="../js/ctv-ui-vue.css">
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            border-bottom: 2px solid;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .flex {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-text {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .form-data {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .form-data pre {
+            background: #fff;
+            padding: 16px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <h1>CTV UI Vue 컴포넌트 테스트</h1>
+                <p>모든 기본 컴포넌트의 기능을 테스트할 수 있습니다</p>
+            </div>
+
+            <!-- CtvInput -->
+            <section>
+                <h2 class="section-title" style="color: #007bff; border-color: #007bff;">
+                    📝 CtvInput
+                </h2>
+                <div class="grid">
+                    <ctv-input v-model="form.username" label="사용자명" placeholder="이름을 입력하세요" @change="handleInputChange">
+                    </ctv-input>
+
+                    <ctv-input v-model="form.email" label="이메일" type="email" placeholder="example@example.com"
+                        :required="true" :validators="['email']" @change="handleInputChange">
+                    </ctv-input>
+
+                    <ctv-input v-model="form.password" label="비밀번호" type="password" placeholder="8자 이상" :required="true"
+                        :minlength="8" @change="handleInputChange">
+                    </ctv-input>
+
+                    <ctv-input v-model="form.phone" label="전화번호" placeholder="010-0000-0000" pattern="^[0-9-]+$"
+                        pattern-message="숫자와 하이픈만 입력 가능합니다" @change="handleInputChange">
+                    </ctv-input>
+
+                    <ctv-input v-model="form.search" label="사용자 검색" placeholder="이름 또는 초성 검색 (예: ㅎㄱㄷ)"
+                        :combo-items="users" combo-label-key="name" combo-value-key="name"
+                        @combo-select="handleComboSelect">
+                    </ctv-input>
+
+                    <ctv-input-group label="사용자 ID/명" required :validators="[customValidator]">
+                        <ctv-input v-model="form.userId" placeholder="사용자 ID" />
+                        <ctv-input v-model="form.userName" placeholder="사용자명" />
+                    </ctv-input-group>
+                </div>
+            </section>
+
+            <!-- CtvSelect -->
+            <section>
+                <h2 class="section-title" style="color: #28a745; border-color: #28a745;">
+                    📋 CtvSelect
+                </h2>
+                <div class="grid">
+                    <ctv-select v-model="form.country" label="국가 선택" :items="countries" :searchable="false"
+                        @change="handleSelectChange">
+                    </ctv-select>
+
+                    <ctv-select v-model="form.city" label="도시 선택" placeholder="도시를 선택하세요" :items="cities"
+                        :searchable="true" :required="true" @change="handleSelectChange">
+                    </ctv-select>
+                </div>
+            </section>
+
+            <!-- CtvDate -->
+            <section>
+                <h2 class="section-title" style="color: #17a2b8; border-color: #17a2b8;">
+                    📅 CtvDate
+                </h2>
+                <div class="grid">
+                    <ctv-date v-model="form.birthDate" label="생년월일" :min="minDate" :max="today" :required="true">
+                    </ctv-date>
+
+                    <ctv-date v-model="form.startDate" label="시작일">
+                    </ctv-date>
+
+                    <ctv-date v-model="form.endDate" label="종료일">
+                    </ctv-date>
+                </div>
+            </section>
+
+            <!-- CtvTextarea -->
+            <section>
+                <h2 class="section-title" style="color: #ffc107; border-color: #ffc107;">
+                    📄 CtvTextarea
+                </h2>
+                <div class="grid">
+                    <ctv-textarea v-model="form.bio" label="자기소개" placeholder="자기소개를 작성하세요" :rows="4" :maxlength="200">
+                    </ctv-textarea>
+
+                    <ctv-textarea v-model="form.message" label="메시지" placeholder="메시지를 입력하세요" :rows="6" :required="true"
+                        :minlength="10">
+                    </ctv-textarea>
+                </div>
+            </section>
+
+            <!-- CtvCheck & CtvSwitch -->
+            <section>
+                <h2 class="section-title" style="color: #6c757d; border-color: #6c757d;">
+                    ☑️ CtvCheck & CtvSwitch
+                </h2>
+                <div class="grid">
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 12px;">단일 체크박스</h3>
+                        <ctv-check v-model="form.agree" label="이용약관에 동의합니다">
+                        </ctv-check>
+                        <p class="info-text">
+                            상태: {{ form.agree ? '동의함' : '동의하지 않음' }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 12px;">체크박스 그룹</h3>
+                        <div class="flex-column">
+                            <ctv-check v-for="hobby in hobbyOptions" :key="hobby.value" v-model="form.hobbies"
+                                :label="hobby.label" :check-value="hobby.value">
+                            </ctv-check>
+                        </div>
+                        <p class="info-text">
+                            선택된 취미: {{ form.hobbies.length > 0 ? form.hobbies.join(', ') : '없음' }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 12px;">토글 스위치</h3>
+                        <div class="flex-column">
+                            <ctv-switch v-model="form.notifications" label="알림 받기">
+                            </ctv-switch>
+                            <ctv-switch v-model="form.darkMode" label="다크 모드">
+                            </ctv-switch>
+                        </div>
+                        <p class="info-text">
+                            알림: {{ form.notifications ? 'ON' : 'OFF' }} |
+                            다크모드: {{ form.darkMode ? 'ON' : 'OFF' }}
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CtvButton -->
+            <section>
+                <h2 class="section-title" style="color: #dc3545; border-color: #dc3545;">
+                    🔘 CtvButton
+                </h2>
+                <div class="grid">
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 12px;">Variants</h3>
+                        <div class="flex">
+                            <ctv-button variant="primary" @click="handleButtonClick">Primary</ctv-button>
+                            <ctv-button variant="secondary" @click="handleButtonClick">Secondary</ctv-button>
+                            <ctv-button variant="success" @click="handleButtonClick">Success</ctv-button>
+                            <ctv-button variant="danger" @click="handleButtonClick">Danger</ctv-button>
+                            <ctv-button variant="warning" @click="handleButtonClick">Warning</ctv-button>
+                            <ctv-button variant="info" @click="handleButtonClick">Info</ctv-button>
+                            <ctv-button variant="link" @click="handleButtonClick">Link</ctv-button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 12px;">Outline</h3>
+                        <div class="flex">
+                            <ctv-button variant="primary" :outline="true"
+                                @click="handleButtonClick">Primary</ctv-button>
+                            <ctv-button variant="secondary" :outline="true"
+                                @click="handleButtonClick">Secondary</ctv-button>
+                            <ctv-button variant="success" :outline="true"
+                                @click="handleButtonClick">Success</ctv-button>
+                            <ctv-button variant="danger" :outline="true" @click="handleButtonClick">Danger</ctv-button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 12px;">Sizes</h3>
+                        <div class="flex" style="align-items: center;">
+                            <ctv-button size="small" @click="handleButtonClick">Small</ctv-button>
+                            <ctv-button size="medium" @click="handleButtonClick">Medium</ctv-button>
+                            <ctv-button size="large" @click="handleButtonClick">Large</ctv-button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 12px;">Disabled & Block</h3>
+                        <div class="grid">
+                            <ctv-button :disabled="true">Disabled Button</ctv-button>
+                            <ctv-button variant="primary" :block="true" @click="handleButtonClick">Block
+                                Button</ctv-button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Form Actions -->
+            <section>
+                <h2 class="section-title" style="color: #333; border-color: #333;">
+                    🎯 Form Actions
+                </h2>
+                <div class="flex" style="justify-content: center;">
+                    <ctv-button variant="primary" size="large" @click="handleSubmit">
+                        Submit (콘솔 확인)
+                    </ctv-button>
+                    <ctv-button variant="secondary" size="large" @click="handleReset">
+                        Reset
+                    </ctv-button>
+                </div>
+            </section>
+
+            <!-- Form Data Display -->
+            <section class="form-data">
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: #333;">📊 현재 폼 데이터 (실시간)</h3>
+                <pre>{{ JSON.stringify(form, null, 2) }}</pre>
+            </section>
+        </div>
+    </div>
+
+    <!-- CTV UI Vue JS (빌드된 파일) -->
+    <script src="../js/ctv-ui-vue.js"></script>
+
+    <!-- 앱 초기화 -->
+    <script>
+        const { createApp } = window.Vue;
+
+        const app = createApp({
+            data() {
+                return {
+                    // Form 데이터
+                    form: {
+                        username: '',
+                        email: '',
+                        password: '',
+                        phone: '',
+                        search: '',
+                        country: '',
+                        city: '',
+                        birthDate: '',
+                        startDate: '',
+                        endDate: '',
+                        bio: '',
+                        message: '',
+                        agree: false,
+                        hobbies: [],
+                        notifications: false,
+                        darkMode: false
+                    },
+
+                    // Select Options
+                    countries: [
+                        { value: 'kr', label: '대한민국' },
+                        { value: 'us', label: '미국' },
+                        { value: 'jp', label: '일본' },
+                        { value: 'cn', label: '중국' }
+                    ],
+
+                    cities: [
+                        { value: 'seoul', label: '서울' },
+                        { value: 'busan', label: '부산' },
+                        { value: 'daegu', label: '대구' },
+                        { value: 'incheon', label: '인천' },
+                        { value: 'gwangju', label: '광주' },
+                        { value: 'daejeon', label: '대전' },
+                        { value: 'ulsan', label: '울산' },
+                        { value: 'sejong', label: '세종' }
+                    ],
+
+                    // Combo Items
+                    users: [
+                        { id: 1, name: '홍길동', dept: '개발팀', email: 'hong@example.com' },
+                        { id: 2, name: '김철수', dept: '디자인팀', email: 'kim@example.com' },
+                        { id: 3, name: '이영희', dept: '기획팀', email: 'lee@example.com' },
+                        { id: 4, name: '박민수', dept: '개발팀', email: 'park@example.com' },
+                        { id: 5, name: '최지수', dept: '마케팅팀', email: 'choi@example.com' }
+                    ],
+
+                    // Hobbies
+                    hobbyOptions: [
+                        { value: 'reading', label: '독서' },
+                        { value: 'music', label: '음악' },
+                        { value: 'sports', label: '운동' },
+                        { value: 'cooking', label: '요리' },
+                        { value: 'travel', label: '여행' }
+                    ]
+                };
+            },
+            computed: {
+                today() {
+                    return new Date().toISOString().split('T')[0];
+                },
+                minDate() {
+                    const date = new Date();
+                    date.setFullYear(date.getFullYear() - 100);
+                    return date.toISOString().split('T')[0];
+                }
+            },
+            methods: {
+                handleInputChange(event) {
+                    console.log('Input Change:', event);
+                },
+                handleSelectChange(event) {
+                    console.log('Select Change:', event);
+                },
+                handleComboSelect(event) {
+                    console.log('Combo Select:', event);
+                },
+                handleButtonClick() {
+                    console.log('Button Clicked!');
+                    alert('버튼이 클릭되었습니다!');
+                },
+                handleSubmit() {
+                    console.log('Form Data:', this.form);
+                    alert('폼 데이터가 콘솔에 출력되었습니다. (F12)');
+                },
+                handleReset() {
+                    Object.keys(this.form).forEach(key => {
+                        if (Array.isArray(this.form[key])) {
+                            this.form[key] = [];
+                        } else if (typeof this.form[key] === 'boolean') {
+                            this.form[key] = false;
+                        } else {
+                            this.form[key] = '';
+                        }
+                    });
+                    alert('폼이 초기화되었습니다.');
+                }
+            }
+        });
+
+        // CtvUI 컴포넌트 등록
+        window.CtvUI.registerComponents(app);
+
+        // 앱 마운트
+        app.mount('#app');
+
+        console.log('[Test Page] Vue 앱 초기화 완료');
+    </script>
+</body>
+
+</html>
